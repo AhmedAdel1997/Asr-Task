@@ -7,7 +7,7 @@ class ConstantManager {
   static const String appName = "Best Promo";
   static const String fontFamily = "SourceSansPro";
   static const String token = "token";
-  static const String projectName = "Dragon Lines";
+  static const String projectName = "Asr Task";
   static const int splashTimer = 4;
   static const String baseUrl = "https://dragon-lines.com/api/";
   static const String emptyText = "";

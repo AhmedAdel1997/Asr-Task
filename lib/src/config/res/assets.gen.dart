@@ -166,6 +166,9 @@ class $AssetsSvgGen {
   SvgGenImage get deleteDialog =>
       const SvgGenImage('assets/svg/delete_dialog.svg');
 
+  /// File path: assets/svg/second_user.svg
+  SvgGenImage get secondUser => const SvgGenImage('assets/svg/second_user.svg');
+
   /// File path: assets/svg/send_record.svg
   SvgGenImage get sendRecord => const SvgGenImage('assets/svg/send_record.svg');
 
@@ -184,6 +187,7 @@ class $AssetsSvgGen {
     camera,
     delete,
     deleteDialog,
+    secondUser,
     sendRecord,
     success,
     uploadImage,
