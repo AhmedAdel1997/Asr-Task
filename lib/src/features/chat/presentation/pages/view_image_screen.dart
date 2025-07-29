@@ -39,32 +39,34 @@ class ViewImageScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.all(16.w),
-        child: Column(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10.r),
-              child: Image.file(image),
-            ),
-            20.szH,
-            GestureDetector(
-              onTap: () {
-                Go.back(true);
-              },
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  AppAssets.images.button.image(
-                    height: 38.h,
-                    width: 145.w,
-                  ),
-                  Text(
-                    'Send',
-                    style: const TextStyle().setH2SemiBold.setWhiteColor,
-                  )
-                ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10.r),
+                child: Image.file(image),
               ),
-            ),
-          ],
+              20.szH,
+              GestureDetector(
+                onTap: () {
+                  Go.back(true);
+                },
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    AppAssets.images.button.image(
+                      height: 38.h,
+                      width: 145.w,
+                    ),
+                    Text(
+                      'Send',
+                      style: const TextStyle().setH2SemiBold.setWhiteColor,
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

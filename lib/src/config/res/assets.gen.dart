@@ -80,6 +80,10 @@ class $AssetsImagesGen {
   AssetGenImage get secondBg =>
       const AssetGenImage('assets/images/second_bg.png');
 
+  /// File path: assets/images/second_user.png
+  AssetGenImage get secondUser =>
+      const AssetGenImage('assets/images/second_user.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
     backgroundBg,
@@ -94,6 +98,7 @@ class $AssetsImagesGen {
     mic,
     record,
     secondBg,
+    secondUser,
   ];
 }
 

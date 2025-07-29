@@ -211,8 +211,8 @@ class _SendMessageWidgetState extends State<SendMessageWidget>
             message: MessageModel(
               message: _messageController.text,
               time: DateTime.now(),
-              senderId: 1,
-              senderName: 'Ahmed Adel',
+              senderId: 2,
+              senderName: 'Maria',
               type: MessageType.text,
               id: Random().nextInt(1000000),
               image: null,

@@ -116,8 +116,8 @@ class GetChatMessagesCubit extends Cubit<GetChatMessagesState> {
         message: MessageModel(
           message: '',
           time: DateTime.now(),
-          senderId: 1,
-          senderName: 'Ahmed Adel',
+          senderId: 2,
+          senderName: 'Maria',
           type: MessageType.image,
           id: Random().nextInt(1000000),
           image: imageUrl,
@@ -178,8 +178,8 @@ class GetChatMessagesCubit extends Cubit<GetChatMessagesState> {
         message: MessageModel(
           message: '',
           time: DateTime.now(),
-          senderId: 1,
-          senderName: 'Ahmed Adel',
+          senderId: 2,
+          senderName: 'Maria',
           type: MessageType.record,
           id: Random().nextInt(1000000),
           image: null,

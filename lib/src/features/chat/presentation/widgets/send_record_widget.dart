@@ -124,7 +124,12 @@ class _SendRecordWidgetState extends State<SendRecordWidget> {
                   await recorderController.record(path: recordedFilePath);
                 }
               },
-              child: AppAssets.svg.sendRecord.svg(),
+              child: isRecording
+                  ? const Icon(
+                      Icons.stop,
+                      color: AppColors.white,
+                    )
+                  : AppAssets.svg.sendRecord.svg(),
             ),
           ],
         ),

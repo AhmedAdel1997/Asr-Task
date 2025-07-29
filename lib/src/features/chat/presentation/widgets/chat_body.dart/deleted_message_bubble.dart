@@ -13,7 +13,7 @@ class DeletedMessageBubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: Alignment.centerRight,
+      alignment: Alignment.centerLeft,
       child: FittedBox(
         fit: BoxFit.scaleDown,
         child: Container(
@@ -21,9 +21,9 @@ class DeletedMessageBubble extends StatelessWidget {
             color: const Color(0xff5F5F5F),
             borderRadius: BorderRadius.only(
               topRight:
-                  message.senderId == 1 ? Radius.zero : Radius.circular(16.r),
+                  message.senderId == 2 ? Radius.zero : Radius.circular(16.r),
               topLeft:
-                  message.senderId == 1 ? Radius.circular(16.r) : Radius.zero,
+                  message.senderId == 2 ? Radius.circular(16.r) : Radius.zero,
               bottomLeft: Radius.circular(16.r),
               bottomRight: Radius.circular(16.r),
             ),
@@ -40,7 +40,7 @@ class DeletedMessageBubble extends StatelessWidget {
               8.szW,
               Expanded(
                 child: Text(
-                  message.senderId == 1
+                  message.senderId == 2
                       ? 'You deleted this message'
                       : '${message.senderName} deleted this message',
                   maxLines: 1,

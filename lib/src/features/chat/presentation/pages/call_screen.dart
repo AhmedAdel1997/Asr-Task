@@ -5,11 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/src/config/res/assets.gen.dart';
 import 'package:flutter_base/src/core/extensions/sized_box_helper.dart';
 import 'package:flutter_base/src/core/extensions/text_style_extensions.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../../../config/res/color_manager.dart';
 import '../../../../core/navigation/navigator.dart';
+import '../cubit/chage_chat_attributes_cubit/chage_chat_attributes_cubit.dart';
 
 const appId = "22be7313c61e40b780942145e0cae3b2";
 const token =
@@ -26,8 +28,8 @@ class CallScreen extends StatefulWidget {
 class _CallScreenState extends State<CallScreen> {
   int? _remoteUid;
   bool _localUserJoined = false;
-  bool _isMicEnabled = true;
-  bool _isCameraEnabled = true;
+  bool _isMicEnabled = false;
+  bool _isCameraEnabled = false;
   late RtcEngine _engine;
 
   @override
@@ -76,8 +78,9 @@ class _CallScreenState extends State<CallScreen> {
     );
 
     await _engine.setClientRole(role: ClientRoleType.clientRoleBroadcaster);
-    await _engine.enableVideo();
-    await _engine.startPreview();
+    await _engine.disableAudio();
+    await _engine.disableVideo();
+    await _engine.stopPreview();
 
     await _engine.joinChannel(
       token: token,
@@ -175,20 +178,21 @@ class _CallScreenState extends State<CallScreen> {
                       ),
                     )
                   : _localUserJoined && !_isCameraEnabled
-                      ? Container(
-                          width: 100.w,
-                          height: 150.h,
-                          decoration: BoxDecoration(
-                            color: Colors.grey[300],
-                            borderRadius: BorderRadius.circular(8.r),
-                          ),
-                          child: Icon(
-                            Icons.videocam_off,
-                            color: Colors.grey[600],
-                            size: 32.sp,
-                          ),
-                        )
-                      : const CircularProgressIndicator(),
+                      ? const SizedBox()
+                      // Container(
+                      //     width: 100.w,
+                      //     height: 150.h,
+                      //     decoration: BoxDecoration(
+                      //       color: Colors.grey[300],
+                      //       borderRadius: BorderRadius.circular(8.r),
+                      //     ),
+                      //     child: Icon(
+                      //       Icons.videocam_off,
+                      //       color: Colors.grey[600],
+                      //       size: 32.sp,
+                      //     ),
+                      //   )
+                      : const SizedBox(),
             ),
           ),
           // Control buttons at bottom
@@ -273,7 +277,13 @@ class _CallScreenState extends State<CallScreen> {
         width: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(AppAssets.images.firstBg.path),
+            image: AssetImage(
+              context
+                  .watch<ChageChatAttributesCubit>()
+                  .state
+                  .selectedBackground
+                  .path,
+            ),
             fit: BoxFit.cover,
           ),
         ),

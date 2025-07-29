@@ -10,7 +10,7 @@ final class DownloadRecordState extends Equatable {
       {required this.status, required this.path, required this.playerState});
 
   factory DownloadRecordState.initial() => const DownloadRecordState(
-      status: BaseStatus.loading, path: '', playerState: PlayerState.stopped);
+      status: BaseStatus.initial, path: '', playerState: PlayerState.stopped);
 
   DownloadRecordState copyWith({
     BaseStatus? status,

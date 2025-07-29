@@ -27,7 +27,7 @@ class _MessageBubbleState extends State<MessageBubble> {
     if (isDeleted) return DeletedMessageBubble(message: widget.message);
     return GestureDetector(
       onLongPress: () {
-        if (widget.message.senderId == 2) return;
+        if (widget.message.senderId == 1) return;
         final RenderBox renderBox = context.findRenderObject() as RenderBox;
         final position = renderBox.localToGlobal(Offset.zero);
         final size = renderBox.size;
@@ -63,17 +63,17 @@ class _MessageBubbleState extends State<MessageBubble> {
       },
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: widget.message.senderId == 1
+        crossAxisAlignment: widget.message.senderId == 2
             ? CrossAxisAlignment.end
             : CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: widget.message.senderId == 1
+            crossAxisAlignment: widget.message.senderId == 2
                 ? CrossAxisAlignment.end
                 : CrossAxisAlignment.start,
             children: [
-              if (widget.message.senderId == 2) ...[
+              if (widget.message.senderId == 1) ...[
                 ClipRRect(
                   borderRadius: BorderRadius.circular(1000.r),
                   child: AppAssets.images.formalPhotoCropped.image(
@@ -85,29 +85,31 @@ class _MessageBubbleState extends State<MessageBubble> {
                 12.szW,
               ],
               Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: widget.message.senderId == 1
+                    ? CrossAxisAlignment.end
+                    : CrossAxisAlignment.start,
                 children: [
-                  if (widget.message.senderId == 2) ...[
-                    Text(
-                      widget.message.senderName,
-                      style: const TextStyle().setH2Medium.setWhiteColor,
-                    ),
-                    8.szH,
-                  ],
-                  MessageTypeWidget(message: widget.message),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (widget.message.senderId == 1) ...[
+                        Text(
+                          widget.message.senderName,
+                          style: const TextStyle().setH2Medium.setWhiteColor,
+                        ),
+                        8.szH,
+                      ],
+                      MessageTypeWidget(message: widget.message),
+                    ],
+                  ),
+                  8.szH,
+                  Text(
+                    DateFormat('HH:mm a').format(widget.message.time),
+                    style: const TextStyle().setTitleMedium.setWhiteColor,
+                  ),
                 ],
               ),
             ],
-          ),
-          8.szH,
-          Align(
-            alignment: widget.message.senderId == 1
-                ? Alignment.centerRight
-                : Alignment.centerLeft,
-            child: Text(
-              DateFormat('HH:mm a').format(widget.message.time),
-              style: const TextStyle().setTitleMedium.setWhiteColor,
-            ),
           ),
         ],
       ),

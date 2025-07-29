@@ -25,7 +25,7 @@ class MessageTypeWidget extends StatelessWidget {
               child: Text(
                 message.message,
                 style: const TextStyle().setH2Medium.copyWith(
-                      color: message.senderId == 1
+                      color: message.senderId == 2
                           ? AppColors.white
                           : const Color(0xff0D082C),
                     ),
@@ -43,9 +43,9 @@ class MessageTypeWidget extends StatelessWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.only(
               topRight:
-                  message.senderId == 1 ? Radius.zero : Radius.circular(16.r),
+                  message.senderId == 2 ? Radius.zero : Radius.circular(16.r),
               topLeft:
-                  message.senderId == 1 ? Radius.circular(16.r) : Radius.zero,
+                  message.senderId == 2 ? Radius.circular(16.r) : Radius.zero,
               bottomLeft: Radius.circular(16.r),
               bottomRight: Radius.circular(16.r),
             ),
@@ -82,14 +82,14 @@ class CustomDecoratedContainer extends StatelessWidget {
       builder: (context, state) {
         return Container(
           decoration: BoxDecoration(
-            color: message.senderId == 1
+            color: message.senderId == 2
                 ? state.selectedColor
                 : const Color(0xffE8ECF1),
             borderRadius: BorderRadius.only(
               topRight:
-                  message.senderId == 1 ? Radius.zero : Radius.circular(16.r),
+                  message.senderId == 2 ? Radius.zero : Radius.circular(16.r),
               topLeft:
-                  message.senderId == 1 ? Radius.circular(16.r) : Radius.zero,
+                  message.senderId == 2 ? Radius.circular(16.r) : Radius.zero,
               bottomLeft: Radius.circular(16.r),
               bottomRight: Radius.circular(16.r),
             ),
