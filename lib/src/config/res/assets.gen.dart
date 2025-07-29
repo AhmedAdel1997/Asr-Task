@@ -159,6 +159,16 @@ class $AssetsSvgGen {
   /// File path: assets/svg/camera.svg
   SvgGenImage get camera => const SvgGenImage('assets/svg/camera.svg');
 
+  /// File path: assets/svg/delete.svg
+  SvgGenImage get delete => const SvgGenImage('assets/svg/delete.svg');
+
+  /// File path: assets/svg/delete_dialog.svg
+  SvgGenImage get deleteDialog =>
+      const SvgGenImage('assets/svg/delete_dialog.svg');
+
+  /// File path: assets/svg/send_record.svg
+  SvgGenImage get sendRecord => const SvgGenImage('assets/svg/send_record.svg');
+
   /// File path: assets/svg/success.svg
   SvgGenImage get success => const SvgGenImage('assets/svg/success.svg');
 
@@ -166,8 +176,19 @@ class $AssetsSvgGen {
   SvgGenImage get uploadImage =>
       const SvgGenImage('assets/svg/upload-image.svg');
 
+  /// File path: assets/svg/wave.svg
+  SvgGenImage get wave => const SvgGenImage('assets/svg/wave.svg');
+
   /// List of all assets
-  List<SvgGenImage> get values => [camera, success, uploadImage];
+  List<SvgGenImage> get values => [
+    camera,
+    delete,
+    deleteDialog,
+    sendRecord,
+    success,
+    uploadImage,
+    wave,
+  ];
 }
 
 class $AssetsTranslationsGen {

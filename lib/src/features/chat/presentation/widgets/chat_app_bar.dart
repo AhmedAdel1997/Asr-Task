@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/src/core/extensions/sized_box_helper.dart';
 import 'package:flutter_base/src/core/extensions/text_style_extensions.dart';
+import 'package:flutter_base/src/core/widgets/are_you_sure_dialog.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../config/res/assets.gen.dart';
 import '../../../../config/res/color_manager.dart';
 import '../../../../core/navigation/navigator.dart';
+import '../cubit/get_chat_messages_cubit/get_chat_messages_cubit.dart';
 import '../pages/change_background_screen.dart';
 import '../pages/change_color_screen.dart';
 
@@ -93,7 +96,19 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
               PopupMenuItem(
-                onTap: () {},
+                onTap: () {
+                  showAreYouSureDialog(
+                    context: context,
+                    title: 'Delete Chat',
+                    buttonText: 'Delete',
+                    function: () async {
+                      await context.read<GetChatMessagesCubit>().deleteChat();
+                      Go.back();
+                    },
+                    description: 'Are you sure you want to delete this chat ?',
+                    image: AppAssets.svg.deleteDialog,
+                  );
+                },
                 height: 40.h,
                 padding: EdgeInsets.zero,
                 child: Column(

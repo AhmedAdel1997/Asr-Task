@@ -15,7 +15,7 @@ class ChatService {
         .collection(_chatsCollection)
         .doc(chatId)
         .collection(_messagesCollection)
-        .orderBy('time', descending: false)
+        .orderBy('time', descending: true)
         .snapshots()
         .map((snapshot) {
       return snapshot.docs.map((doc) {
@@ -56,6 +56,24 @@ class ChatService {
           .delete();
     } catch (e) {
       throw Exception('Failed to delete message: $e');
+    }
+  }
+
+  //Delete entire chat messages
+  static Future<void> deleteChat(String chatId) async {
+    try {
+      await _firestore
+          .collection(_chatsCollection)
+          .doc(chatId)
+          .collection(_messagesCollection)
+          .get()
+          .then((value) {
+        for (var element in value.docs) {
+          element.reference.delete();
+        }
+      });
+    } catch (e) {
+      throw Exception('Failed to delete chat: $e');
     }
   }
 }

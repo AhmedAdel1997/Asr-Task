@@ -21,13 +21,12 @@ class MessageBubble extends StatefulWidget {
 }
 
 class _MessageBubbleState extends State<MessageBubble> {
-  // bool showDeleteContainer = false;
   @override
   Widget build(BuildContext context) {
     final isDeleted = widget.message.deletedAt != null;
     if (isDeleted) return DeletedMessageBubble(message: widget.message);
     return GestureDetector(
-      onTap: () {
+      onLongPress: () {
         if (widget.message.senderId == 2) return;
         final RenderBox renderBox = context.findRenderObject() as RenderBox;
         final position = renderBox.localToGlobal(Offset.zero);
