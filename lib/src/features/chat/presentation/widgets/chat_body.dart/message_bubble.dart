@@ -27,7 +27,7 @@ class _MessageBubbleState extends State<MessageBubble> {
     if (isDeleted) return DeletedMessageBubble(message: widget.message);
     return GestureDetector(
       onLongPress: () {
-        if (widget.message.senderId == 1) return;
+        if (widget.message.senderId == 2) return;
         final RenderBox renderBox = context.findRenderObject() as RenderBox;
         final position = renderBox.localToGlobal(Offset.zero);
         final size = renderBox.size;
@@ -63,20 +63,20 @@ class _MessageBubbleState extends State<MessageBubble> {
       },
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: widget.message.senderId == 2
+        crossAxisAlignment: widget.message.senderId == 1
             ? CrossAxisAlignment.end
             : CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: widget.message.senderId == 2
+            crossAxisAlignment: widget.message.senderId == 1
                 ? CrossAxisAlignment.end
                 : CrossAxisAlignment.start,
             children: [
-              if (widget.message.senderId == 1) ...[
+              if (widget.message.senderId == 2) ...[
                 ClipRRect(
                   borderRadius: BorderRadius.circular(1000.r),
-                  child: AppAssets.images.formalPhotoCropped.image(
+                  child: AppAssets.images.secondUser.image(
                     width: 40.w,
                     height: 40.h,
                     fit: BoxFit.fill,
@@ -85,14 +85,14 @@ class _MessageBubbleState extends State<MessageBubble> {
                 12.szW,
               ],
               Column(
-                crossAxisAlignment: widget.message.senderId == 1
+                crossAxisAlignment: widget.message.senderId == 2
                     ? CrossAxisAlignment.end
                     : CrossAxisAlignment.start,
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      if (widget.message.senderId == 1) ...[
+                      if (widget.message.senderId == 2) ...[
                         Text(
                           widget.message.senderName,
                           style: const TextStyle().setH2Medium.setWhiteColor,

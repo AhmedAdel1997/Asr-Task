@@ -46,14 +46,14 @@ class ViewRecord extends StatelessWidget {
       builder: (context, downloadRecordState) {
         return Container(
           decoration: BoxDecoration(
-            color: widget.message.senderId == 2
+            color: widget.message.senderId == 1
                 ? selectedColor
                 : const Color(0xffE8ECF1),
             borderRadius: BorderRadius.only(
-              topRight: widget.message.senderId == 2
+              topRight: widget.message.senderId == 1
                   ? Radius.zero
                   : Radius.circular(16.r),
-              topLeft: widget.message.senderId == 2
+              topLeft: widget.message.senderId == 1
                   ? Radius.circular(16.r)
                   : Radius.zero,
               bottomLeft: Radius.circular(16.r),
@@ -69,13 +69,13 @@ class ViewRecord extends StatelessWidget {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(1000.r),
-                    child: widget.message.senderId == 2
-                        ? AppAssets.images.secondUser.image(
+                    child: widget.message.senderId == 1
+                        ? AppAssets.images.formalPhotoCropped.image(
                             width: 40.w,
                             height: 40.h,
                             fit: BoxFit.fill,
                           )
-                        : AppAssets.images.formalPhotoCropped.image(
+                        : AppAssets.images.secondUser.image(
                             width: 40.w,
                             height: 40.h,
                             fit: BoxFit.fill,
@@ -100,7 +100,7 @@ class ViewRecord extends StatelessWidget {
                         height: 28.h,
                         child: Icon(
                           Icons.download,
-                          color: widget.message.senderId == 2
+                          color: widget.message.senderId == 1
                               ? AppColors.white
                               : AppColors.black,
                         ),
@@ -109,7 +109,7 @@ class ViewRecord extends StatelessWidget {
                       AppAssets.svg.wave.svg(
                         width: 200.w,
                         colorFilter: ColorFilter.mode(
-                          widget.message.senderId == 2
+                          widget.message.senderId == 1
                               ? AppColors.white
                               : AppColors.black,
                           BlendMode.srcIn,
@@ -124,7 +124,7 @@ class ViewRecord extends StatelessWidget {
                   width: 28.w,
                   height: 28.h,
                   child: CircularProgressIndicator(
-                    color: widget.message.senderId == 2
+                    color: widget.message.senderId == 1
                         ? AppColors.white
                         : AppColors.black,
                   ),
@@ -156,13 +156,13 @@ class ViewRecord extends StatelessWidget {
                   icon: downloadRecordState.playerState == PlayerState.playing
                       ? Icon(
                           Icons.pause,
-                          color: widget.message.senderId == 2
+                          color: widget.message.senderId == 1
                               ? AppColors.white
                               : AppColors.black,
                         )
                       : Icon(
                           Icons.play_arrow,
-                          color: widget.message.senderId == 2
+                          color: widget.message.senderId == 1
                               ? AppColors.white
                               : AppColors.black,
                         ),
@@ -173,10 +173,10 @@ class ViewRecord extends StatelessWidget {
                     size: Size(400.w, 16.h),
                     waveformType: WaveformType.fitWidth,
                     playerWaveStyle: PlayerWaveStyle(
-                      liveWaveColor: widget.message.senderId == 2
+                      liveWaveColor: widget.message.senderId == 1
                           ? AppColors.black
                           : AppColors.grey,
-                      fixedWaveColor: widget.message.senderId == 2
+                      fixedWaveColor: widget.message.senderId == 1
                           ? AppColors.white
                           : AppColors.grey.withValues(alpha: 0.3),
                     ),

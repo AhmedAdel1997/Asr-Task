@@ -292,7 +292,7 @@ class _CallScreenState extends State<CallScreen> {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(1000.r),
-              child: AppAssets.images.formalPhotoCropped.image(
+              child: AppAssets.images.secondUser.image(
                 width: 150.w,
                 height: 150.h,
                 fit: BoxFit.fill,
@@ -300,7 +300,7 @@ class _CallScreenState extends State<CallScreen> {
             ),
             16.szH,
             Text(
-              'Please wait for Ahmed Adel to join',
+              'Please wait for Maria to join',
               textAlign: TextAlign.center,
               style: const TextStyle().setH2SemiBold.setWhiteColor,
             ),
