@@ -27,7 +27,7 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(1000.r),
-              child: AppAssets.images.formalPhotoCropped.image(
+              child: AppAssets.images.secondUser.image(
                 width: 40.w,
                 height: 40.h,
                 fit: BoxFit.fill,
@@ -35,7 +35,7 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
             8.szW,
             Text(
-              'Ahmed Adel',
+              'Maria',
               style: const TextStyle().setH1SemiBold,
             ),
             // 16.szW,
