@@ -13,7 +13,8 @@ class DeletedMessageBubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: Alignment.centerLeft,
+      alignment:
+          message.senderId == 2 ? Alignment.centerRight : Alignment.centerLeft,
       child: FittedBox(
         fit: BoxFit.scaleDown,
         child: Container(

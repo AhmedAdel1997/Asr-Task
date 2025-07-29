@@ -20,14 +20,14 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       toolbarHeight: 64.h,
-      leadingWidth: 160.w,
+      leadingWidth: 210.w,
       leading: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w),
         child: Row(
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(1000.r),
-              child: AppAssets.images.secondUser.image(
+              child: AppAssets.images.formalPhotoCropped.image(
                 width: 40.w,
                 height: 40.h,
                 fit: BoxFit.fill,
@@ -35,7 +35,7 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
             8.szW,
             Text(
-              'Maria',
+              'Ahmed Adel',
               style: const TextStyle().setH1SemiBold,
             ),
             // 16.szW,
