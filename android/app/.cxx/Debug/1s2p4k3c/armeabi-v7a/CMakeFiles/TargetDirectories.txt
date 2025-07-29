@@ -1,0 +1,2 @@
+D:/dragonlines/android/app/.cxx/Debug/1s2p4k3c/armeabi-v7a/CMakeFiles/edit_cache.dir
+D:/dragonlines/android/app/.cxx/Debug/1s2p4k3c/armeabi-v7a/CMakeFiles/rebuild_cache.dir

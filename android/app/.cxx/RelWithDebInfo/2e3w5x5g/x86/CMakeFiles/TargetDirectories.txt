@@ -1,0 +1,2 @@
+D:/almasiah/android/app/.cxx/RelWithDebInfo/2e3w5x5g/x86/CMakeFiles/edit_cache.dir
+D:/almasiah/android/app/.cxx/RelWithDebInfo/2e3w5x5g/x86/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,44 @@
+import 'package:flutter/widgets.dart';
+import 'package:flutter_base/src/config/res/assets.gen.dart';
+import 'package:flutter_base/src/core/extensions/sized_box_helper.dart';
+import 'package:flutter_base/src/core/extensions/text_style_extensions.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../data/models/message_model.dart';
+
+class DeletedMessageBubble extends StatelessWidget {
+  final MessageModel message;
+  const DeletedMessageBubble({super.key, required this.message});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: const Color(0xff5F5F5F),
+        borderRadius: BorderRadius.only(
+          topRight: message.senderId == 1 ? Radius.zero : Radius.circular(16.r),
+          topLeft: message.senderId == 1 ? Radius.circular(16.r) : Radius.zero,
+          bottomLeft: Radius.circular(16.r),
+          bottomRight: Radius.circular(16.r),
+        ),
+      ),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+      constraints: BoxConstraints(
+        maxWidth: 250.w,
+        minWidth: 200.w,
+      ),
+      child: Row(
+        children: [
+          AppAssets.images.deleted.image(),
+          8.szW,
+          Text(
+            message.senderId == 1
+                ? 'You deleted this message'
+                : '${message.senderName} deleted this message',
+            style: const TextStyle().setH2Medium.setWhiteColor,
+          ),
+        ],
+      ),
+    );
+  }
+}

@@ -1,0 +1,1 @@
+/Users/7abitaa/Desktop/projects/clean_arch_base/build/app/intermediates/cxx/RelWithDebInfo/3v6b1t3d/obj/x86_64

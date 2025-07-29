@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "185446821912",
+    "project_id": "portfolio-153b1",
+    "storage_bucket": "portfolio-153b1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:185446821912:android:83e504d4963c077e2b536d",
+        "android_client_info": {
+          "package_name": "com.asr.chatTask"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCG-Ymcf3y-kSMZyGPgh8ow_dT5GvoNED8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

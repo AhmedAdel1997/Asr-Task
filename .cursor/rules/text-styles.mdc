@@ -1,0 +1,17 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+# Use TextStyle extensions
+
+- Apply text style like this const TextStyle().setH1.setBlackColor
+
+- For Colors :
+    - if Color Hex not exist in the file [color_manager.dart](mdc:lib/src/config/res/color_manager.dart) then add it in file [color_manager.dart](mdc:lib/src/config/res/color_manager.dart) like this:
+        static const Color colorNameBasedOnValue = Color(0xff009B4D);
+    -Go to File [text_style_extensions.dart](mdc:lib/src/core/extensions/text_style_extensions.dart) then declare the new TextStyle getter Like this
+        TextStyle get setPrimaryColor => copyWith(color: AppColors.primary);
+        
+

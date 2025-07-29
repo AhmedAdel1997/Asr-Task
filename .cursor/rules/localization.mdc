@@ -1,0 +1,29 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+# All Translations must be in File 'assets/translations/'
+
+- First of all do not type in file [locale_keys.g.dart](mdc:lib/src/config/language/locale_keys.g.dart) ever
+- add this line in imports
+    import '../../../../config/language/locale_keys.g.dart' show LocaleKeys;
+- find all titles in the screen
+- For Exmaple:
+    -name : Ahmed
+    -age : 28 years
+    name and age are titles , ahmed and 28 years are values
+- only translate title and implement values as it is
+- translate title in english then go to file [lang.json](mdc:assets/translations/lang.json)
+- add a new key and value to the current map in the file [lang.json](mdc:assets/translations/lang.json)
+- the key is the english translation without any special character and the value is the arabic translation
+- do not modify any existing key in the already existing map
+- use the translations in file like
+    For Example:
+    if you add a new key and value in [lang.json](mdc:assets/translations/lang.json) like this
+    "Hello how are you":"مرحبا كيف حالك",
+    to access the new translation, you need to call LocaleKeys.helloHowAreYou 
+- neglect .tr() as it is not important anymore
+
+    

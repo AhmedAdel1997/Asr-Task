@@ -1,0 +1,2 @@
+/Users/7abitaa/Desktop/projects/almasiah/android/app/.cxx/RelWithDebInfo/2l5mxt50/x86/CMakeFiles/edit_cache.dir
+/Users/7abitaa/Desktop/projects/almasiah/android/app/.cxx/RelWithDebInfo/2l5mxt50/x86/CMakeFiles/rebuild_cache.dir

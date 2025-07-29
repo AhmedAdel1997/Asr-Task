@@ -1,0 +1,1 @@
+/Users/7abitaa/Desktop/projects/clean_arch_base/build/app/intermediates/cxx/Debug/14739631/obj/arm64-v8a
