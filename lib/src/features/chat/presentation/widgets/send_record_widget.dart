@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:audio_waveforms/audio_waveforms.dart';
@@ -25,6 +26,7 @@ class _SendRecordWidgetState extends State<SendRecordWidget> {
   @override
   void initState() {
     super.initState();
+
     recorderController.checkPermission();
   }
 
@@ -32,6 +34,30 @@ class _SendRecordWidgetState extends State<SendRecordWidget> {
   void dispose() {
     recorderController.dispose();
     super.dispose();
+  }
+
+  Timer? timer;
+  int _elapsedSeconds = 0;
+
+  // Start timer and update the text every second
+  void startTimer() {
+    _elapsedSeconds = 0;
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        _elapsedSeconds++;
+      });
+    });
+  }
+
+  void stopTimer() {
+    timer?.cancel();
+    _elapsedSeconds = 0;
+  }
+
+  String getTimerText() {
+    final minutes = _elapsedSeconds ~/ 60;
+    final seconds = _elapsedSeconds % 60;
+    return '${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
   }
 
   @override
@@ -57,6 +83,7 @@ class _SendRecordWidgetState extends State<SendRecordWidget> {
           children: [
             GestureDetector(
               onTap: () async {
+                stopTimer();
                 setState(() {
                   isRecording = false;
                 });
@@ -69,7 +96,7 @@ class _SendRecordWidgetState extends State<SendRecordWidget> {
             ),
             Expanded(
               child: Text(
-                '00:00',
+                getTimerText(),
                 textAlign: TextAlign.center,
                 style: const TextStyle().setH2SemiBold.copyWith(
                       color: AppColors.white,
@@ -79,6 +106,7 @@ class _SendRecordWidgetState extends State<SendRecordWidget> {
             GestureDetector(
               onTap: () async {
                 if (recorderController.hasPermission) {
+                  startTimer();
                   if (recorderController.isRecording) {
                     recordedFilePath = await recorderController.stop();
                     log(recordedFilePath.toString(), name: 'recordedFilePath');

@@ -102,8 +102,8 @@ class _MessageBubbleState extends State<MessageBubble> {
           8.szH,
           Align(
             alignment: widget.message.senderId == 1
-                ? Alignment.centerLeft
-                : Alignment.centerRight,
+                ? Alignment.centerRight
+                : Alignment.centerLeft,
             child: Text(
               DateFormat('HH:mm a').format(widget.message.time),
               style: const TextStyle().setTitleMedium.setWhiteColor,

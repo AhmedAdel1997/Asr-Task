@@ -98,8 +98,9 @@ class CustomDecoratedContainer extends StatelessWidget {
               padding ?? EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
           constraints: BoxConstraints(
             maxWidth: 320.w,
-            minWidth: 200.w,
+            minWidth: 100.w,
           ),
+          // width: 320.w,
           child: child,
         );
       },

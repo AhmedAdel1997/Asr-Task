@@ -87,8 +87,10 @@ class GetChatMessagesCubit extends Cubit<GetChatMessagesState> {
     return super.close();
   }
 
-  Future<void> sendPhotoMessage() async {
-    final image = await ImagePicker().pickImage(source: ImageSource.camera);
+  Future<void> sendPhotoMessage({
+    required ImageSource source,
+  }) async {
+    final image = await ImagePicker().pickImage(source: source);
 
     if (image == null) return;
     //upload to firebase storage then get the url
@@ -164,7 +166,8 @@ class GetChatMessagesCubit extends Cubit<GetChatMessagesState> {
     );
     emit(state.copyWith(uploadRecordStatus: BaseStatus.loading));
     final storageRef = FirebaseStorage.instance.ref();
-    final recordRef = storageRef.child('chat_records/$path');
+    final recordRef = storageRef
+        .child('chat_records/${DateTime.now().millisecondsSinceEpoch}/$path');
     await recordRef.putFile(File(path));
     final recordUrl = await recordRef.getDownloadURL();
     //send the message to the firestore

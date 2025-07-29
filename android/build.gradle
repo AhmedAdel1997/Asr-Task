@@ -3,6 +3,13 @@ allprojects {
         google()
         mavenCentral()
     }
+    
+    configurations.all {
+        resolutionStrategy {
+            force 'androidx.media3:media3-exoplayer:1.4.1'
+            force 'androidx.media3:media3-exoplayer-rtsp:1.4.1'
+        }
+    }
 }
 
 rootProject.buildDir = "../build"

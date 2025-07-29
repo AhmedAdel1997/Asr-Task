@@ -7,9 +7,11 @@ import 'package:flutter_base/src/core/widgets/text_fields/default_text_field.dar
 import 'package:flutter_base/src/features/chat/presentation/widgets/send_record_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../../config/res/assets.gen.dart';
 import '../../../../config/res/color_manager.dart';
+import '../../../../core/navigation/navigator.dart';
 import '../../../../core/shared/enums.dart';
 import '../../data/models/message_model.dart';
 import '../cubit/get_chat_messages_cubit/get_chat_messages_cubit.dart';
@@ -91,7 +93,69 @@ class _SendMessageWidgetState extends State<SendMessageWidget>
                 children: [
                   GestureDetector(
                     onTap: () {
-                      context.read<GetChatMessagesCubit>().sendPhotoMessage();
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (_) {
+                          return Container(
+                            // height: 200.h,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: AppColors.white,
+                              borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(16.r),
+                              ),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                16.szH,
+                                ListTile(
+                                  onTap: () {
+                                    Go.back();
+                                    context
+                                        .read<GetChatMessagesCubit>()
+                                        .sendPhotoMessage(
+                                            source: ImageSource.camera);
+                                  },
+                                  leading: AppAssets.svg.camera.svg(
+                                    height: 22.h,
+                                    width: 22.w,
+                                  ),
+                                  visualDensity: VisualDensity.compact,
+                                  title: Text(
+                                    'Camera',
+                                    style: const TextStyle()
+                                        .setTitleMedium
+                                        .setFontColor,
+                                  ),
+                                ),
+                                ListTile(
+                                  onTap: () {
+                                    Go.back();
+                                    context
+                                        .read<GetChatMessagesCubit>()
+                                        .sendPhotoMessage(
+                                            source: ImageSource.gallery);
+                                  },
+                                  leading: AppAssets.svg.uploadImage.svg(
+                                    height: 22.h,
+                                    width: 22.w,
+                                  ),
+                                  visualDensity: VisualDensity.compact,
+                                  title: Text(
+                                    'Galley',
+                                    style: const TextStyle()
+                                        .setTitleMedium
+                                        .setFontColor,
+                                  ),
+                                ),
+                                16.szH,
+                              ],
+                            ),
+                          );
+                        },
+                      );
                     },
                     child: AppAssets.images.camera.image(
                       height: 34.h,

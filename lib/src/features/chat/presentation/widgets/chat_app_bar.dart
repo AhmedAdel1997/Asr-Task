@@ -9,6 +9,7 @@ import '../../../../config/res/assets.gen.dart';
 import '../../../../config/res/color_manager.dart';
 import '../../../../core/navigation/navigator.dart';
 import '../cubit/get_chat_messages_cubit/get_chat_messages_cubit.dart';
+import '../pages/call_screen.dart';
 import '../pages/change_background_screen.dart';
 import '../pages/change_color_screen.dart';
 
@@ -42,9 +43,14 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       actions: [
-        AppAssets.images.call.image(
-          height: 27.h,
-          width: 27.w,
+        GestureDetector(
+          onTap: () {
+            Go.to(const CallScreen());
+          },
+          child: AppAssets.images.call.image(
+            height: 27.h,
+            width: 27.w,
+          ),
         ),
         16.szW,
         PopupMenuButton(

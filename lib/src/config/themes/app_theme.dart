@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/src/config/res/app_sizes.dart';
 import 'package:flutter_base/src/config/res/constants_manager.dart';
 import 'package:flutter_base/src/core/extensions/material_color_extension.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../res/color_manager.dart';
 
@@ -54,36 +53,6 @@ class AppTheme {
       inputDecorationTheme: const InputDecorationTheme(
         prefixIconColor: AppColors.border,
       ),
-      textTheme: GoogleFonts.poppinsTextTheme(
-        TextTheme(
-          // This Style For AppBar Text
-          headlineLarge: TextStyle(
-            fontSize: FontSize.s18,
-            color: AppColors.secondary,
-            fontWeight: FontWeightManager.medium,
-          ),
-          // This Style For Normal Text With PrimaryColor
-          titleLarge: TextStyle(
-            fontSize: FontSize.s13,
-            color: AppColors.primary,
-          ),
-          // This Style For Normal Text With SecondryColor
-          titleMedium: TextStyle(
-            fontSize: FontSize.s13,
-            color: AppColors.primary,
-          ),
-          // This Style For Normal Text With ThirdColor
-          titleSmall: TextStyle(
-            fontSize: FontSize.s13,
-            color: AppColors.primary,
-          ),
-          // This Style For Hint Text
-          bodySmall: TextStyle(
-            fontSize: FontSize.s8,
-            color: AppColors.hintText,
-          ),
-        ),
-      ),
     );
   }
 
@@ -127,36 +96,6 @@ class AppTheme {
       ),
       inputDecorationTheme: const InputDecorationTheme(
         prefixIconColor: AppColorsWithDarkMode.border,
-      ),
-      textTheme: GoogleFonts.poppinsTextTheme(
-        TextTheme(
-          // This Style For AppBar Text
-          headlineLarge: TextStyle(
-            fontSize: FontSize.s18,
-            color: AppColors.secondary,
-            fontWeight: FontWeightManager.medium,
-          ),
-          // This Style For Normal Text With PrimaryColor
-          titleLarge: TextStyle(
-            fontSize: FontSize.s13,
-            color: AppColors.primary,
-          ),
-          // This Style For Normal Text With SecondryColor
-          titleMedium: TextStyle(
-            fontSize: FontSize.s13,
-            color: AppColors.primary,
-          ),
-          // This Style For Normal Text With ThirdColor
-          titleSmall: TextStyle(
-            fontSize: FontSize.s13,
-            color: AppColors.primary,
-          ),
-          // This Style For Hint Text
-          bodySmall: TextStyle(
-            fontSize: FontSize.s8,
-            color: AppColors.hintText,
-          ),
-        ),
       ),
     );
   }

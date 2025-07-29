@@ -12,32 +12,44 @@ class DeletedMessageBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: const Color(0xff5F5F5F),
-        borderRadius: BorderRadius.only(
-          topRight: message.senderId == 1 ? Radius.zero : Radius.circular(16.r),
-          topLeft: message.senderId == 1 ? Radius.circular(16.r) : Radius.zero,
-          bottomLeft: Radius.circular(16.r),
-          bottomRight: Radius.circular(16.r),
-        ),
-      ),
-      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
-      constraints: BoxConstraints(
-        maxWidth: 250.w,
-        minWidth: 200.w,
-      ),
-      child: Row(
-        children: [
-          AppAssets.images.deleted.image(),
-          8.szW,
-          Text(
-            message.senderId == 1
-                ? 'You deleted this message'
-                : '${message.senderName} deleted this message',
-            style: const TextStyle().setH2Medium.setWhiteColor,
+    return Align(
+      alignment: Alignment.centerRight,
+      child: FittedBox(
+        fit: BoxFit.scaleDown,
+        child: Container(
+          decoration: BoxDecoration(
+            color: const Color(0xff5F5F5F),
+            borderRadius: BorderRadius.only(
+              topRight:
+                  message.senderId == 1 ? Radius.zero : Radius.circular(16.r),
+              topLeft:
+                  message.senderId == 1 ? Radius.circular(16.r) : Radius.zero,
+              bottomLeft: Radius.circular(16.r),
+              bottomRight: Radius.circular(16.r),
+            ),
           ),
-        ],
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+          constraints: BoxConstraints(
+            maxWidth: 320.w,
+            minWidth: 160.w,
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              AppAssets.images.deleted.image(),
+              8.szW,
+              Expanded(
+                child: Text(
+                  message.senderId == 1
+                      ? 'You deleted this message'
+                      : '${message.senderName} deleted this message',
+                  maxLines: 1,
+                  style: const TextStyle().setH2Medium.setWhiteColor,
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
