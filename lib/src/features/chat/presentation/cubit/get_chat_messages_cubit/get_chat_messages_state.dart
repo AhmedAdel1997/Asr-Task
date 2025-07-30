@@ -7,6 +7,8 @@ final class GetChatMessagesState extends Equatable {
   final List<MessageModel> messages;
   final String error;
   final bool isRecording;
+  final bool isTyping;
+  final Map<String, dynamic> typingUsers;
 
   const GetChatMessagesState({
     required this.status,
@@ -15,6 +17,8 @@ final class GetChatMessagesState extends Equatable {
     required this.messages,
     required this.error,
     required this.isRecording,
+    required this.isTyping,
+    required this.typingUsers,
   });
 
   factory GetChatMessagesState.initial() => const GetChatMessagesState(
@@ -24,6 +28,8 @@ final class GetChatMessagesState extends Equatable {
         messages: [],
         error: '',
         isRecording: false,
+        isTyping: false,
+        typingUsers: {},
       );
 
   GetChatMessagesState copyWith({
@@ -33,6 +39,8 @@ final class GetChatMessagesState extends Equatable {
     List<MessageModel>? messages,
     String? error,
     bool? isRecording,
+    bool? isTyping,
+    Map<String, dynamic>? typingUsers,
   }) {
     return GetChatMessagesState(
       status: status ?? this.status,
@@ -41,6 +49,8 @@ final class GetChatMessagesState extends Equatable {
       messages: messages ?? this.messages,
       error: error ?? this.error,
       isRecording: isRecording ?? this.isRecording,
+      isTyping: isTyping ?? this.isTyping,
+      typingUsers: typingUsers ?? this.typingUsers,
     );
   }
 
@@ -52,5 +62,7 @@ final class GetChatMessagesState extends Equatable {
         messages,
         error,
         isRecording,
+        isTyping,
+        typingUsers,
       ];
 }
