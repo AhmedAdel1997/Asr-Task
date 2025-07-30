@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:developer';
 
 import 'package:audio_waveforms/audio_waveforms.dart';
@@ -9,7 +8,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../config/res/color_manager.dart';
+import '../../../../config/res/constants_manager.dart';
 import '../cubit/get_chat_messages_cubit/get_chat_messages_cubit.dart';
+import '../cubit/timer_cubit/timer_cubit.dart';
 
 class SendRecordWidget extends StatefulWidget {
   const SendRecordWidget({super.key});
@@ -26,114 +27,96 @@ class _SendRecordWidgetState extends State<SendRecordWidget> {
   @override
   void initState() {
     super.initState();
-
+    sl<TimerCubit>().stopTimer();
     recorderController.checkPermission();
   }
 
   @override
   void dispose() {
     recorderController.dispose();
+
     super.dispose();
-  }
-
-  Timer? timer;
-  int _elapsedSeconds = 0;
-
-  // Start timer and update the text every second
-  void startTimer() {
-    _elapsedSeconds = 0;
-    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      setState(() {
-        _elapsedSeconds++;
-      });
-    });
-  }
-
-  void stopTimer() {
-    timer?.cancel();
-    _elapsedSeconds = 0;
-  }
-
-  String getTimerText() {
-    final minutes = _elapsedSeconds ~/ 60;
-    final seconds = _elapsedSeconds % 60;
-    return '${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        isRecording
-            ? AudioWaveforms(
-                recorderController: recorderController,
-                waveStyle: const WaveStyle(
-                  extendWaveform: true,
-                  waveColor: AppColors.white,
-                  durationLinesColor: AppColors.white,
-                  middleLineColor: Colors.transparent,
-                ),
-                margin: EdgeInsets.zero,
-                padding: EdgeInsets.zero,
-                size: Size(300.w, 20.h),
-              )
-            : AppAssets.svg.wave.svg(),
-        Row(
+    return BlocBuilder<TimerCubit, TimerState>(
+      builder: (context, state) {
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            GestureDetector(
-              onTap: () async {
-                stopTimer();
-                setState(() {
-                  isRecording = false;
-                });
-                context.read<GetChatMessagesCubit>().stopRecording();
-                if (recorderController.isRecording) {
-                  recordedFilePath = await recorderController.stop();
-                }
-              },
-              child: AppAssets.svg.delete.svg(),
-            ),
-            Expanded(
-              child: Text(
-                getTimerText(),
-                textAlign: TextAlign.center,
-                style: const TextStyle().setH2SemiBold.copyWith(
-                      color: AppColors.white,
+            isRecording
+                ? AudioWaveforms(
+                    recorderController: recorderController,
+                    waveStyle: const WaveStyle(
+                      extendWaveform: true,
+                      waveColor: AppColors.white,
+                      durationLinesColor: AppColors.white,
+                      middleLineColor: Colors.transparent,
                     ),
-              ),
-            ),
-            GestureDetector(
-              onTap: () async {
-                if (recorderController.hasPermission) {
-                  startTimer();
-                  if (recorderController.isRecording) {
-                    recordedFilePath = await recorderController.stop();
-                    log(recordedFilePath.toString(), name: 'recordedFilePath');
-                    if (context.mounted) {
-                      context.read<GetChatMessagesCubit>().stopRecording();
-                      context
-                          .read<GetChatMessagesCubit>()
-                          .sendRecordMessage(path: recordedFilePath!);
+                    margin: EdgeInsets.zero,
+                    padding: EdgeInsets.zero,
+                    size: Size(300.w, 20.h),
+                  )
+                : AppAssets.svg.wave.svg(),
+            Row(
+              children: [
+                GestureDetector(
+                  onTap: () async {
+                    context.read<TimerCubit>().stopTimer();
+                    setState(() {
+                      isRecording = false;
+                    });
+                    context.read<GetChatMessagesCubit>().stopRecording();
+                    if (recorderController.isRecording) {
+                      recordedFilePath = await recorderController.stop();
                     }
-                    return;
-                  }
-                  setState(() {
-                    isRecording = true;
-                  });
-                  await recorderController.record(path: recordedFilePath);
-                }
-              },
-              child: isRecording
-                  ? const Icon(
-                      Icons.stop,
-                      color: AppColors.white,
-                    )
-                  : AppAssets.svg.sendRecord.svg(),
+                  },
+                  child: AppAssets.svg.delete.svg(),
+                ),
+                Expanded(
+                  child: Text(
+                    context.read<TimerCubit>().getTimerText(),
+                    textAlign: TextAlign.center,
+                    style: const TextStyle().setH2SemiBold.copyWith(
+                          color: AppColors.white,
+                        ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () async {
+                    if (recorderController.hasPermission) {
+                      context.read<TimerCubit>().startTimer();
+                      if (recorderController.isRecording) {
+                        recordedFilePath = await recorderController.stop();
+                        log(recordedFilePath.toString(),
+                            name: 'recordedFilePath');
+                        if (context.mounted) {
+                          context.read<GetChatMessagesCubit>().stopRecording();
+                          context
+                              .read<GetChatMessagesCubit>()
+                              .sendRecordMessage(path: recordedFilePath!);
+                        }
+                        return;
+                      }
+                      setState(() {
+                        isRecording = true;
+                      });
+                      await recorderController.record(path: recordedFilePath);
+                    }
+                  },
+                  child: isRecording
+                      ? const Icon(
+                          Icons.stop,
+                          color: AppColors.white,
+                        )
+                      : AppAssets.svg.sendRecord.svg(),
+                ),
+              ],
             ),
           ],
-        ),
-      ],
+        );
+      },
     );
   }
 }

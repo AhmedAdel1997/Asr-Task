@@ -13,6 +13,7 @@ import 'core/navigation/route_generator.dart';
 import 'core/shared/cubits/user_cubit/user_cubit.dart';
 import 'core/shared/route_observer.dart';
 import 'features/chat/presentation/cubit/chage_chat_attributes_cubit/chage_chat_attributes_cubit.dart';
+import 'features/chat/presentation/cubit/timer_cubit/timer_cubit.dart';
 import 'features/chat/presentation/pages/chat_screen.dart';
 
 class App extends StatefulWidget {
@@ -37,6 +38,9 @@ class _AppState extends State<App> {
             ),
             BlocProvider(
               create: (context) => sl<ChageChatAttributesCubit>(),
+            ),
+            BlocProvider(
+              create: (context) => sl<TimerCubit>(),
             ),
           ],
           child: MaterialApp(
