@@ -44,8 +44,13 @@ class _ChatBodyState extends State<ChatBody> {
                     reverse: true,
                     controller:
                         context.read<GetChatMessagesCubit>().scrollController,
+                    addAutomaticKeepAlives: true,
+                    addRepaintBoundaries: true,
+                    cacheExtent: 1000, // Keep more items in memory
                     itemBuilder: (context, index) {
-                      return MessageBubble(message: state.messages[index]);
+                      return RepaintBoundary(
+                        child: MessageBubble(message: state.messages[index]),
+                      );
                     },
                     separatorBuilder: (context, index) {
                       return 16.szH;

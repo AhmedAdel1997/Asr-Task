@@ -31,7 +31,6 @@ class _ChatScreenState extends State<ChatScreen> {
           sl<GetChatMessagesCubit>()..getChatMessagesStream(chatId: '1'),
       child: GestureDetector(
         onTap: () {
-          // Unfocus when tapping outside of text fields
           FocusScope.of(context).unfocus();
         },
         child: Scaffold(

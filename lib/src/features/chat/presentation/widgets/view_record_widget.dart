@@ -20,9 +20,14 @@ class ViewRecordWidget extends StatefulWidget {
   State<ViewRecordWidget> createState() => _ViewRecordWidgetState();
 }
 
-class _ViewRecordWidgetState extends State<ViewRecordWidget> {
+class _ViewRecordWidgetState extends State<ViewRecordWidget>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return BlocProvider(
       create: (context) => sl<DownloadRecordCubit>(),
       child: ViewRecord(widget: widget),
