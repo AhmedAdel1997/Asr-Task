@@ -37,6 +37,20 @@ class _SendMessageWidgetState extends State<SendMessageWidget>
       setState(() {
         isFieldEmpty = _messageController.text.isEmpty;
       });
+
+      // Trigger typing events
+      if (_messageController.text.isNotEmpty) {
+        context.read<GetChatMessagesCubit>().startTyping();
+      } else {
+        context.read<GetChatMessagesCubit>().stopTyping();
+      }
+    });
+
+    // Add focus listener to handle typing when focus changes
+    _focusNode.addListener(() {
+      if (!_focusNode.hasFocus && _messageController.text.isEmpty) {
+        context.read<GetChatMessagesCubit>().stopTyping();
+      }
     });
 
     // Ensure focus node is not focused initially
@@ -49,6 +63,7 @@ class _SendMessageWidgetState extends State<SendMessageWidget>
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     _messageController.dispose();
+    _focusNode.removeListener(() {});
     _focusNode.dispose();
     super.dispose();
   }
@@ -223,6 +238,9 @@ class _SendMessageWidgetState extends State<SendMessageWidget>
 
       _messageController.clear();
       _focusNode.unfocus();
+
+      // Stop typing when message is sent
+      context.read<GetChatMessagesCubit>().stopTyping();
     }
   }
 }

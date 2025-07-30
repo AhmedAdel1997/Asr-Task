@@ -84,12 +84,12 @@ class _AreYouSureDialogState extends State<AreYouSureDialog> {
           16.szH,
           Text(
             widget.title,
-            style: const TextStyle().setH2Medium.setFontColor,
+            style: const TextStyle().setH1Medium.setFontColor,
           ),
           8.szH,
           Text(
             widget.description,
-            style: const TextStyle().setTitle.setShade2Color,
+            style: const TextStyle().setH1Medium.setShade2Color,
           ),
           24.szH,
           _isLoading

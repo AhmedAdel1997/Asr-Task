@@ -22,7 +22,13 @@ class GetChatMessagesCubit extends Cubit<GetChatMessagesState> {
   GetChatMessagesCubit() : super(GetChatMessagesState.initial());
 
   StreamSubscription<List<MessageModel>>? _messagesSubscription;
+  StreamSubscription<Map<String, dynamic>>? _typingSubscription;
   final ScrollController scrollController = ScrollController();
+  Timer? _typingTimer;
+
+  // Current user info (you can make this configurable)
+  static const int currentUserId = 2;
+  static const String currentUserName = 'Maria';
 
   /// Get real-time stream of messages
   void getChatMessagesStream({
@@ -31,6 +37,7 @@ class GetChatMessagesCubit extends Cubit<GetChatMessagesState> {
     emit(state.copyWith(status: BaseStatus.loading));
 
     _messagesSubscription?.cancel();
+    _typingSubscription?.cancel();
 
     _messagesSubscription = ChatService.getChatMessagesStream(chatId).listen(
       (messages) {
@@ -45,6 +52,27 @@ class GetChatMessagesCubit extends Cubit<GetChatMessagesState> {
           status: BaseStatus.error,
           error: error.toString(),
         ));
+      },
+    );
+
+    // Listen to typing status
+    _typingSubscription = ChatService.getTypingStream(chatId).listen(
+      (typingUsers) {
+        // Filter out current user from typing users
+        final otherUsersTyping = <String, dynamic>{};
+        typingUsers.forEach((userId, userData) {
+          if (int.parse(userId) != currentUserId) {
+            otherUsersTyping[userId] = userData;
+          }
+        });
+
+        emit(state.copyWith(
+          typingUsers: otherUsersTyping,
+        ));
+      },
+      onError: (error) {
+        // Don't show error for typing stream, just log it
+        print('Typing stream error: $error');
       },
     );
   }
@@ -84,6 +112,8 @@ class GetChatMessagesCubit extends Cubit<GetChatMessagesState> {
   @override
   Future<void> close() {
     _messagesSubscription?.cancel();
+    _typingSubscription?.cancel();
+    _typingTimer?.cancel();
     return super.close();
   }
 
@@ -156,6 +186,53 @@ class GetChatMessagesCubit extends Cubit<GetChatMessagesState> {
 
   void stopRecording() async {
     emit(state.copyWith(isRecording: false));
+  }
+
+  void startTyping() {
+    // Cancel existing timer
+    _typingTimer?.cancel();
+
+    // Only show typing indicator if not already typing
+    if (!state.isTyping) {
+      emit(state.copyWith(isTyping: true));
+    }
+
+    // Send typing status to Firestore
+    ChatService.startTyping('1', currentUserId, currentUserName)
+        .catchError((error) {
+      print('Failed to start typing: $error');
+    });
+
+    // Set a timer to stop typing after 3 seconds of inactivity
+    _typingTimer = Timer(const Duration(seconds: 3), () {
+      if (state.isTyping) {
+        stopTyping();
+      }
+    });
+  }
+
+  void stopTyping() {
+    _typingTimer?.cancel();
+    emit(state.copyWith(isTyping: false));
+
+    // Send stop typing status to Firestore
+    ChatService.stopTyping('1', currentUserId).catchError((error) {
+      print('Failed to stop typing: $error');
+    });
+  }
+
+  // Test method to simulate another user typing (for testing purposes)
+  void simulateOtherUserTyping() {
+    ChatService.startTyping('1', 2, 'John Doe').catchError((error) {
+      print('Failed to simulate typing: $error');
+    });
+  }
+
+  // Test method to stop other user typing (for testing purposes)
+  void simulateOtherUserStopTyping() {
+    ChatService.stopTyping('1', 2).catchError((error) {
+      print('Failed to simulate stop typing: $error');
+    });
   }
 
   Future<void> sendRecordMessage({required String path}) async {

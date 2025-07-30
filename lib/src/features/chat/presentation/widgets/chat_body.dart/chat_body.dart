@@ -10,6 +10,7 @@ import '../../../../../core/shared/base_state.dart';
 import '../../cubit/chage_chat_attributes_cubit/chage_chat_attributes_cubit.dart';
 import '../image_loading_widget.dart';
 import '../record_loading_widget.dart';
+import '../typing_widget.dart';
 import 'message_bubble.dart';
 
 class ChatBody extends StatefulWidget {
@@ -60,6 +61,13 @@ class _ChatBodyState extends State<ChatBody> {
                   10.szH,
                   const RecordLoadingWidget(),
                 ],
+                // Show typing indicators for other users
+                ...state.typingUsers.values.map((userData) {
+                  return Padding(
+                    padding: EdgeInsets.only(top: 10.h),
+                    child: const TypingWidget(),
+                  );
+                }),
               ],
             ),
           ),
