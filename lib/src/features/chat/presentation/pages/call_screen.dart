@@ -13,9 +13,9 @@ import '../../../../config/res/color_manager.dart';
 import '../../../../core/navigation/navigator.dart';
 import '../cubit/chage_chat_attributes_cubit/chage_chat_attributes_cubit.dart';
 
-const appId = "22be7313c61e40b780942145e0cae3b2";
+const appId = "596af55994f04aa589c4a0a52e11087f";
 const token =
-    "007eJxTYPC5zB2ilffmbJrJ7Cc1fBo3llhM3X+K9cm0PTtbTMKFk+coMBgZJaWaGxsaJ5sZppoYJJlbGFiaGBmamKYaJCemGicZyf7syGgIZGSYuHEGKyMDBIL4XAyOGbmpKbohqcUlDAwA9w4hUA==";
+    "007eJxTYNBxY14k0CAgKMLZUDZhWei7XSxyf8/bKUia6pnKTJnw3kyBwdTSLDHN1NTS0iTNwCQx0dTCMtkk0SDR1CjV0NDAwjztT0pXRkMgI8Nx3u0sjAwQCOJzMThm5Kam6IakFpcwMAAAjL4dWQ==";
 const channel = "Ahmed-Test";
 
 class CallScreen extends StatefulWidget {
